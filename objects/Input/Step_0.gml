@@ -1,0 +1,9 @@
+left=kc_a;
+right=kc_d;
+down=kc_s;
+up=kc_w;
+action1=kc_j;
+action2=kc_k;
+action3=kc_l;
+any_pressed=kp_anykey;
+any=kc_any;

@@ -1,0 +1,8 @@
+left=false;
+right=false;
+up=false;
+down=false;
+action1=false;
+action2=false;
+action3=false;
+esc=false;

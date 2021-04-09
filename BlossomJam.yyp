@@ -1,0 +1,53 @@
+{
+  "resources": [
+    {"id":{"name":"InitGame","path":"scripts/InitGame/InitGame.yy",},"order":5,},
+    {"id":{"name":"spr_spawn_point","path":"sprites/spr_spawn_point/spr_spawn_point.yy",},"order":11,},
+    {"id":{"name":"tileset_example","path":"tilesets/tileset_example/tileset_example.yy",},"order":9,},
+    {"id":{"name":"Input","path":"objects/Input/Input.yy",},"order":1,},
+    {"id":{"name":"spr_tileset_example","path":"sprites/spr_tileset_example/spr_tileset_example.yy",},"order":8,},
+    {"id":{"name":"rm_stage1","path":"rooms/rm_stage1/rm_stage1.yy",},"order":7,},
+    {"id":{"name":"GameController","path":"objects/GameController/GameController.yy",},"order":3,},
+    {"id":{"name":"Player","path":"objects/Player/Player.yy",},"order":2,},
+    {"id":{"name":"SpawnPoint","path":"objects/SpawnPoint/SpawnPoint.yy",},"order":10,},
+    {"id":{"name":"Camera","path":"objects/Camera/Camera.yy",},"order":6,},
+    {"id":{"name":"InitInput","path":"scripts/InitInput/InitInput.yy",},"order":4,},
+    {"id":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},
+    {"name":"Android","path":"options/android/options_android.yy",},
+    {"name":"HTML5","path":"options/html5/options_html5.yy",},
+    {"name":"iOS","path":"options/ios/options_ios.yy",},
+    {"name":"Linux","path":"options/linux/options_linux.yy",},
+    {"name":"macOS","path":"options/mac/options_mac.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"tvOS","path":"options/tvos/options_tvos.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
+    {"roomId":{"name":"rm_stage1","path":"rooms/rm_stage1/rm_stage1.yy",},},
+  ],
+  "Folders": [],
+  "AudioGroups": [
+    {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,"resourceVersion":"1.3","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2.3.2.556",
+  },
+  "resourceVersion": "1.4",
+  "name": "BlossomJam",
+  "tags": [],
+  "resourceType": "GMProject",
+}
