@@ -32,6 +32,8 @@
     {"propertyId":{"name":"spr_pull","path":"objects/Enemy/Enemy.yy",},"objectId":{"name":"Enemy","path":"objects/Enemy/Enemy.yy",},"value":"enemy1_pull","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"hit_frame_first","path":"objects/Enemy/Enemy.yy",},"objectId":{"name":"Enemy","path":"objects/Enemy/Enemy.yy",},"value":"5","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
     {"propertyId":{"name":"hit_frame_last","path":"objects/Enemy/Enemy.yy",},"objectId":{"name":"Enemy","path":"objects/Enemy/Enemy.yy",},"value":"7","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"spr_tired","path":"objects/Enemy/Enemy.yy",},"objectId":{"name":"Enemy","path":"objects/Enemy/Enemy.yy",},"value":"enemy1_tired","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"spr_invul","path":"objects/Enemy/Enemy.yy",},"objectId":{"name":"Enemy","path":"objects/Enemy/Enemy.yy",},"value":"enemy1_invul","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "Enemy",

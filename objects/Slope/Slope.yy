@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "BlossomJam",
-    "path": "BlossomJam.yyp",
+    "name": "Not Used",
+    "path": "folders/Not Used.yy",
   },
   "resourceVersion": "1.0",
   "name": "Slope",

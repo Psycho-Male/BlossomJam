@@ -9,6 +9,9 @@ sprite={
 function catch_enemy(){
     var _enemy=collision_rectangle(xprevious,y,x,y-sprite_height,Enemy,false,true);
     if instance_exists(_enemy){
+        if _enemy.state==_enemy.invul.state{
+            return false;
+        }
         state=state_pull;
         speed=0;
         _enemy.image_xscale=sign(_enemy.x-x);

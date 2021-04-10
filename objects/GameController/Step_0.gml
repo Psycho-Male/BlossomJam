@@ -21,7 +21,7 @@ if mc_right1{
         }
     }
 }
-if mp_left1{
+if mp_left1&&kc_shift{
     instance_create_layer(SpawnPoint.x,SpawnPoint.y,"Instances",Enemy1);
 }
 if kp_tab{

@@ -1,5 +1,5 @@
 var _len=ds_list_size(hearts);
-if Player.hp<_len{
+if _len>0&&Player.hp<_len{
     if instance_exists(hearts[|_len-1]) with hearts[|_len-1]{
         hurt();
     }

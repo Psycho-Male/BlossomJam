@@ -94,12 +94,26 @@ tired={
         other.state_name="Tired";
         other.sprite_index=other.spr_tired;
         if t>tt{
-            other.state=other.normal.state;
+            other.state=other.invul.state;
             t=0;
         }
         t++;
         with other CheckHCollision();
     },
+}
+invul={
+    t:0,
+    tt:60,
+    state:function(){
+        other.state_name="Invul";
+        other.sprite_index=other.spr_invul;
+        if t>tt{
+            other.state=other.normal.state;
+            t=0;
+        }
+        t++;
+        with other CheckHCollision();
+    }
 }
 pull={
     state:function(){

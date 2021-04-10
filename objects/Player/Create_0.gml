@@ -6,7 +6,7 @@
 #macro bboxRight        x+9
 #macro idFacing         image_xscale
 #macro attOffsetX       26
-#macro idVcenter        y-sprite_height/2
+#macro idVCenter        y-sprite_height/2
 #macro voidPosY         y-8
 #macro idAbove          y-15
 layer_add_instance("Instances",id);
@@ -25,6 +25,8 @@ sprite={
     charge_full:player_charge_full,
     attack:player_attack,
     hurt:player_hurt,
+    corner_grab:player_corner_grab,
+    wine_grab:player_wine_grab,
 }
 sprite_index=sprite.idle;
 hsp=0;
@@ -55,6 +57,8 @@ hp=3;
 onground=true;
 jump_force=8;
 shot=false;
+corner=noone;
+wine_prevent=false;
 //---------\\
 //Functions||
 //--------//
@@ -65,7 +69,7 @@ function jump_buffer(){
 }
 function ground_check(_low){
     if is_undefined(_low) _low=false;
-    if !onground{
+    if !onground&&corner==noone{
         vsp=_low?grav_low:grav;
         //grav+=_low?grav_v:grav_v;
         if onground{
@@ -110,9 +114,6 @@ function hsp_approach(_target,_spd){
     hsp=hsp_target;
     hsp_target=approach(hsp_target,_target,_spd);
 }
-//---------------\\
-//Above Collision||
-//--------------//
 function above_collision(){
     if vsp<0&&place_meeting(x,idAbove+vsp,Collision){
         while !place_meeting(x,idAbove,Collision){
@@ -124,11 +125,8 @@ function above_collision(){
         return true;
     }
 }
-//----------------\\
-//Ground Collision||
-//---------------//
 function ground_collision(){
-    if !onground{
+    if !onground&&corner=noone{
         onground=position_meeting(x,y+vsp,Collision);//||position_meeting(x,y+vsp,Slope);
         if onground{
             while !position_meeting(x,y,Collision){
@@ -147,7 +145,7 @@ function ground_collision(){
     }
 }
 function jump(){
-    if onground&&(inpJump){
+    if kp_anykey&&(onground||corner!=noone)&&(inpJump){
         jump_buffer();
         //grav_v=.01;
         return true;
@@ -167,6 +165,49 @@ function touchdown(){
         jumping=false;
     }
     air_dashed=false;
+    wine_prevent=false;
+}
+function corner_check(){
+    if hsp!=0{
+        var _bbox=image_xscale==1?bboxRight:bboxLeft;
+        if state==state_drop{
+            corner=instance_position(_bbox+hsp,y+vsp,Corner);
+        }else if state==state_jump{
+            corner=instance_position(_bbox+hsp,idAbove+vsp,Corner);
+        }else{
+            return false;
+        }
+        if instance_exists(corner){
+            vsp=0;hsp=0;
+            var _dir=sign(corner.x-x);
+            x=_dir==1?corner.bbox_left:corner.bbox_right;
+            y=corner.y+sprHalfH;
+            state=state_hang;
+            jumping=false;
+            return true;
+        }
+    }
+    return false;
+}
+function wine_check(){
+    if !wine_prevent&&hsp!=0{
+        var _bbox=image_xscale==1?bboxRight:bboxLeft;
+        var _wine=noone;
+        if state==state_drop||state==state_jump{
+            _wine=instance_position(_bbox+hsp,y+vsp,Wine);
+        }else{
+            return false;
+        }
+        if instance_exists(_wine){
+            _wine.depth=Player.depth+1;
+            vsp=0;hsp=0;
+            x=_wine.x;
+            state=state_wine_hang;
+            jumping=false;
+            return true;
+        }
+    }
+    return false;
 }
 //----\\
 //DASH||
@@ -345,7 +386,7 @@ function state_dash_recover(){
 }
 function state_jump(){
     lock_movement(false,false);
-    if charge.func()||dash(){
+    if charge.func()||dash()||corner_check()||wine_check(){
         exit;
     }
     move();
@@ -376,6 +417,42 @@ function state_drop(){
     grav+=grav_v;
     if onground{
         touchdown();
+    }else{
+        if !corner_check(){
+            wine_check();
+        }
+    }
+}
+function state_hang(){
+    lock_movement(true,true);
+    sprite_index=sprite.corner_grab;
+    if kp_a||kp_d{
+        corner=noone;
+        state=state_drop;
+    }
+    jump();
+    if jumping{
+        state=state_jump;
+        vsp-=jump_force;
+    }
+}
+function state_wine_hang(){
+    lock_movement(true,false);
+    sprite_index=sprite.wine_grab;
+    if (kp_w||kp_k)&&(Input.left||Input.right){
+        wine_prevent=true;
+        jumping=true;
+        state=state_jump;
+        vsp-=jump_force;
+    }else if Input.up||Input.down{
+        vsp=(Input.down-Input.up)/2;
+        if !position_meeting(x,y,Wine){
+            state=state_drop;
+        }
+        //image_speed=sprite_get_speed(sprite_index);
+    }else{
+        vsp=0;
+        //image_speed=0;
     }
 }
 function state_hurt_recover(){

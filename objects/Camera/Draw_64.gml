@@ -15,6 +15,7 @@ if instance_exists(Player) with Player{
     AddGuiMessage("jump_buff_block: "+str(jump_buff_block));
     AddGuiMessage("air_dashed: "+str(air_dashed));
     AddGuiMessage("hp: "+str(hp));
+    AddGuiMessage("jump_force: "+str(jump_force));
 }
 if instance_exists(Input) with Input{
     AddGuiMessage("hlock: "+str(hlock));
