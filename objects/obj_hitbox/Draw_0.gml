@@ -1,1 +1,3 @@
-draw_self();
+if GameController.debug{
+    draw_self();
+}

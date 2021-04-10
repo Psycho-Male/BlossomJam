@@ -52,3 +52,20 @@ function GetHitbox(_x,_y,_id){
         return id;
     }
 }
+function CheckHCollision(){
+    if hsp!=0{
+        if object_index==Player{
+            var _bbox=image_xscale==1?bboxRight:bboxLeft;
+        }else{
+            var _bbox=image_xscale==1?bboxLeft:bboxRight;
+        }
+        var _hsp=hsp+sign(hsp);
+        var _collided=position_meeting(_bbox+_hsp,y-2,Collision);
+        if _collided{
+            AddGuiMessage("HCollided");
+            hsp=0;
+            return true;
+        }
+    }
+    return false;
+}

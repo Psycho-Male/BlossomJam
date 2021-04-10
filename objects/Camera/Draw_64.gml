@@ -20,6 +20,7 @@ with Player{
     AddGuiMessage("grav: "+str(grav));
     AddGuiMessage("coyt: "+str(coyt));
     AddGuiMessage("jump_buff_block: "+str(jump_buff_block));
+    AddGuiMessage("air_dashed: "+str(air_dashed));
 }
 with Input{
     AddGuiMessage("hlock: "+str(hlock));
@@ -27,9 +28,13 @@ with Input{
     AddGuiMessage("action_lock: "+str(action_lock));
 }
 with Enemy{
+    AddGuiMessage("Enemy hsp: "+str(hsp));
     AddGuiMessage("normal.t: "+str(normal.t));
+    AddGuiMessage("Enemy State: "+str(state_name));
 }
-draw_set_halign(fa_left);
-for(var i=0;i<array_length(gui_message);i++){
-    draw_text(0,16*i,gui_message[i]);
+if GameController.debug{
+    draw_set_halign(fa_left);
+    for(var i=0;i<array_length(gui_message);i++){
+        draw_text(0,16*i,gui_message[i]);
+    }
 }

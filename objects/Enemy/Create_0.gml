@@ -21,6 +21,7 @@ normal={
     msp:1,
     dir:1,
     state:function(){
+        other.state_name="Normal";
         if other.target_found{
             other.state=other.chase.state;
         }else{
@@ -35,12 +36,15 @@ normal={
             }
             t++;
         }
+        with other CheckHCollision();
     },
 }
 chase={
     msp:1,
     dir:1,
     state:function(){
+        other.state_name="Chase";
+        other.sprite_index=other.spr_walk;
         dir=sign(Player.x-other.x);
         other.hsp=dir*msp;
         if !other.target_found{
@@ -48,11 +52,12 @@ chase={
         }else if abs(Player.x-other.x)<=other.attack_range/2{
             other.state=other.attack.state;
         }
+        with other CheckHCollision();
     },
 }
 attack={
-    force_reset:12,
-    force:6,
+    force_reset:8,
+    force:8,
     force_v:1,
     func:function(){
         other.hsp=-force*other.image_xscale;
@@ -62,6 +67,7 @@ attack={
         force=force_reset;
     },
     state:function(){
+        other.state_name="Attack";
         other.sprite_index=other.spr_attack;
         with other{
             if image_index>=hit_frame_first&&image_index<hit_frame_last{
@@ -71,20 +77,41 @@ attack={
                 }
             }else if instance_exists(hitbox){
                 instance_destroy(hitbox);
-                hsp=0;
+                //hsp=0;
             }
         }
         if otherAnimEnd{
             reset();
-            other.state=other.normal.state;
+            other.state=other.tired.state;
         }
+        with other CheckHCollision();
     },
 }
 tired={
+    t:0,
+    tt:120,
     state:function(){
+        other.state_name="Tired";
+        other.sprite_index=other.spr_tired;
+        if t>tt{
+            other.state=other.normal.state;
+            t=0;
+        }
+        t++;
+        with other CheckHCollision();
     },
+}
+pull={
+    state:function(){
+        hsp=0;vsp=0;
+        other.sprite_index=other.spr_pull;
+        if otherAnimEnd{
+            instance_destroy(other.id);
+        }
+    }
 }
 //---\\
 //END||
 //--//
+state_name="Normal";
 state=normal.state;

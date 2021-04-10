@@ -5,3 +5,4 @@ Player,
 Camera,
 GUI,
 ];
+debug=false;

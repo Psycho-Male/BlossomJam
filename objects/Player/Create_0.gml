@@ -1,5 +1,5 @@
 #macro animEnd          image_index>sprite_get_number(sprite_index)-1
-#macro otherAnimEnd     other.image_index>other.sprite_get_number(other.sprite_index)-1
+#macro otherAnimEnd     other.image_index>sprite_get_number(other.sprite_index)-1
 #macro sprHalfW         sprite_width/2
 #macro sprHalfH         sprite_height/2
 #macro bboxLeft         x-9
@@ -9,6 +9,7 @@
 #macro idVcenter        y-sprite_height/2
 #macro voidPosY         y-8
 #macro idAbove          y-15
+layer_add_instance("Instances",id);
 sprite={
     prv:noone,
     frame_prot:false,
@@ -49,6 +50,7 @@ drop_buffer_reset=5;
 drop_buffer=drop_buffer_reset;
 vcenter=0;
 jump_buff_block=false;
+air_dashed=false;
 function lock_movement(_hlock,_vlock){
     hlock=_hlock;
     vlock=_vlock;
@@ -80,7 +82,7 @@ function move(){
             hsp=0;
         }
     }
-    return check_hcollision();
+    return CheckHCollision();
 }
 function hsp_approach(_target,_spd){
     hsp=hsp_target;
@@ -91,8 +93,15 @@ function hsp_approach(_target,_spd){
 //---//
 dash_force=8;
 function dash(){
-    SfxPlay(sfx_dash);
-    if Input.shift{
+    if Input.dash{
+        if state==state_jump||state==state_drop{
+            if !air_dashed{
+                air_dashed=true;
+            }else{
+                return false;
+            }
+        }
+        //SfxPlay(sfx_dash);
         hsp_target=sign(image_xscale)*dash_force;
         state=state_dash;
         vsp=0;
@@ -104,6 +113,9 @@ function dash(){
 }
 function state_dash(){
     lock_movement(false,true);
+    if charge.func(){
+        exit;
+    }
     if Input.left{
         hsp_target-=.1;
     }else if Input.right{
@@ -120,7 +132,7 @@ function state_dash(){
         }
         image_index=0;
     }
-    if check_hcollision(){
+    if CheckHCollision(){
         state=state_normal;
     }
     jump();
@@ -136,36 +148,13 @@ function state_dash_recover(){
     if !onground||image_index>sprite_get_number(sprite_index)-1{
         state=state_normal;
     }
-    if check_hcollision(){
+    if CheckHCollision(){
         state=state_normal;
     }
 }
 //----------\\
 //HCollision||
 //---------//
-function check_hcollision(){
-    if hsp!=0{
-        var _bbox=image_xscale==1?bboxRight:bboxLeft;
-        var _hsp=hsp+sign(hsp);
-        //var _slope=instance_position(_bbox+_hsp,y-1,Slope);
-        //if instance_exists(_slope){
-        //    if Input.right{
-        //        hsp=lengthdir_x(hsp,45);
-        //        vsp=lengthdir_y(vsp,45);
-        //    }
-        //    AddGuiMessage("Slope Collided");
-        //    return true;
-        //}else{
-            var _collided=position_meeting(_bbox+_hsp,y-2,Collision);
-            if _collided{
-                AddGuiMessage("HCollided");
-                hsp=0;
-                return true;
-            }
-        //}
-    }
-    return false;
-}
 //---------------\\
 //Above Collision||
 //--------------//
@@ -209,7 +198,7 @@ function ground_collision(){
 function jump(){
     if onground&&(inpJump){
         jump_buffer();
-        grav_v=.01;
+        //grav_v=.01;
         return true;
     }else{
         return false;
@@ -226,9 +215,10 @@ function touchdown(){
     }else{
         jumping=false;
     }
+    air_dashed=false;
 }
 onground=true;
-jump_force=12;
+jump_force=8;
 function state_normal(){
     lock_movement(false,false);
     if charge.func(){
@@ -259,7 +249,7 @@ function state_jump(){
         state=state_drop;
     }else{
         vsp=approach(vsp,0,grav);
-        grav+=grav_v;
+        //grav+=grav_v;
     }
 }
 function state_drop(){
@@ -334,12 +324,17 @@ function immunity_check(){
 //------\\
 //Attack||
 //-----//
+function set_dir(){
+    var _dir=Input.right-Input.left;
+    if _dir!=0 image_xscale=_dir;
+}
 function state_precharge(){
     lock_movement(true,false);
-    InputLock(true,true);
+    InputLock(false,true);
     ground_check(true);
     move();
     sprite_index=sprite.precharge;
+    set_dir();
     if animEnd{
         if Input.action1{
             state=state_charge;
@@ -349,10 +344,10 @@ function state_precharge(){
     }
 }
 charge={
-    mx:6,
-    mn:2,
+    mx:10,
+    mn:6,
     v:.1,
-    current:2,
+    current:6,
     tt:30,
     t:0,
     func:function(){
@@ -373,12 +368,13 @@ charge={
 }
 function state_charge(){
     lock_movement(true,false);
-    InputLock(true,true);
+    InputLock(false,true);
     ground_check(true);
     move();
     Camera.screenshake();
     charge.current=approach(charge.current,charge.mx,charge.v);
     AddGuiMessage("charge.current: "+str(charge.current));
+    set_dir();
     if charge.current==charge.mx{
         charge.t++;
         if charge.t%charge.tt<charge.tt/2{
@@ -419,7 +415,7 @@ function ground_check(_low){
     if is_undefined(_low) _low=false;
     if !onground{
         vsp=_low?grav_low:grav;
-        grav+=_low?grav_v:grav_v;
+        //grav+=_low?grav_v:grav_v;
         if onground{
             touchdown();
         }

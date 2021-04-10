@@ -7,7 +7,7 @@ if !vlock{
     up=kc_w;
     action2=kc_k;
 }
-shift=kc_shift;
+dash=kp_shift;
 if !action_lock{
     action1=kc_j;
     action3=kc_l;

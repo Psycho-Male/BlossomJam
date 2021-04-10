@@ -5,7 +5,8 @@ if !instance_exists(owner){
 x=owner.x;
 y=owner.y;
 if !hit_player{
-    if instance_place(x,y,Player){
+    if !Player.immunity.active&&instance_place(x,y,Player){
+        Player.hit(id);
         hit_player=true;
     }
 }
