@@ -9,3 +9,11 @@ function ExcessiveInstance(){
         instance_destroy();
     }
 }
+function AddGuiMessage(_text){
+    var _len=array_length(Camera.gui_message);
+    Camera.gui_message[_len]=_text;
+}
+function reset_color(){
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+}

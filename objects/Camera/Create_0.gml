@@ -2,7 +2,7 @@ focus_instance=Player.id;
 view_enabled=true;
 function update(){
     x=focus_instance.x-view_width/2;
-    y=focus_instance.y-view_height/2;
+    y=focus_instance.vcenter-view_height/2;
     width=camera_get_view_width(view_camera[0]);
     height=camera_get_view_height(view_camera[0]);
     right=x+width;
@@ -26,3 +26,27 @@ for(var i = 1; i <= room_last; i++) {
 camera_set_view_pos (view_camera[0],x,y);
 camera_set_view_size(view_camera[0],view_width,view_height);
 update();
+gui_message=[""];
+//-----------\\
+//Screenshake||
+//----------//
+rumble={
+    reset:function(){
+        x=0;
+        y=0;
+        value=0;
+    },
+    v:.05,
+    mx:2,
+}
+rumble.reset();
+function screenshake(){
+    with rumble{
+        value=approach(value,mx,v);
+        x=choose(-value,value);
+        y=choose(-value,value);
+    }
+    AddGuiMessage("rumble.value: "+str(rumble.value));
+    AddGuiMessage("rumble.x: "+str(rumble.x));
+    AddGuiMessage("rumble.y: "+str(rumble.y));
+}
