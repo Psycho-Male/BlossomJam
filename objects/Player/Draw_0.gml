@@ -1,1 +1,1 @@
-//Override
+draw_self();

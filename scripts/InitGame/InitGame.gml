@@ -1,4 +1,4 @@
-function trace(_text){
+function Trace(_text){
     show_debug_message(_text);
 }
 function InstanceCreate(_index){

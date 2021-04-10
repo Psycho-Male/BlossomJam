@@ -1,54 +1,64 @@
-movement={
-    hsp:0,
-    vsp:0,
-    jump:false,
-    grav:0,
-    jump_v:12,
-    reset:function(){
-        hsp=0;
-        vsp=0;
-    },
-    jump:function(){
-        jumping=true;
-        grav=1;
-        grav_v=.5;
-    },
-    touchdown:function(){
-        jumping=false;
-        vsp=0;
-        grav=0;
-    },
-    onground=true;
+sprite={
+    idle:player_idle,
+    run:player_run,
+    fall:player_fall,
+    jump:player_jump,
 }
-function movement(){
-    if Input.any{
-        hsp=Input.right-Input.left;
-        if Input.action2||Input.up{
-            movement.jump();
-        }
-    }
-    movement.reset();
+sprite_index=sprite.idle;
+sprite_prv=sprite_index;
+hsp=0;
+vsp=0;
+jump=false;
+jumping=false;
+msp_run=2;
+msp_sprint=4;
+hsp_a=.1;
+hps_target=0;
+grav=.5;
+grav_v=.01;
+function jump(){
+    jumping=true;
+    grav=.5;
+    grav_v=.01;
 }
+function touchdown(){
+    jumping=false;
+    vsp=0;
+    grav=0;
+    state=state_normal;
+}
+onground=true;
+jump_force=12;
 function state_normal(){
-    movement();
+    state_text="Normal";
+    if Input.action2||Input.up{
+        jump();
+    }
+    sprite_index=hsp==0?sprite.idle:sprite.run;
     if jumping{
         state=state_jump;
-        vsp=jump_v;
+        vsp-=jump_force;
+    }else if !onground{
+        state=state_drop;
     }
 }
 function state_jump(){
-    vsp+=grav_v;
-    if vsp>=0
+    state_text="Jump";
+    sprite_index=sprite.jump;
+    if vsp>=0{
+        state=state_drop;
+    }else{
+        vsp=approach(vsp,0,grav);
+        grav+=grav_v;
+    }
 }
 function state_drop(){
-    vsp=grav;
+    state_text="Drop";
+    sprite_index=sprite.fall;
+    vsp+=grav;
     grav+=grav_v;
     if onground{
-        if vsp>0{
-            vsp=0;
-            y+=y%16;
-        }
-        movement.touchdown();
+        touchdown();
     }
 }
 function state_land(){
@@ -59,3 +69,5 @@ function state_attack(){
 }
 function state_damage(){
 }
+state=state_normal;
+collision_map=noone;

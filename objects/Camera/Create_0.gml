@@ -1,6 +1,8 @@
 focus_instance=Player.id;
 view_enabled=true;
 function update(){
+    x=focus_instance.x-view_width/2;
+    y=focus_instance.y-view_height/2;
     width=camera_get_view_width(view_camera[0]);
     height=camera_get_view_height(view_camera[0]);
     right=x+width;
@@ -12,4 +14,15 @@ function update(){
 }
 view_width=683;
 view_height=348;
+//window_set_size(view_width,view_height);
+alarm[0]=1;
+for(var i = 1; i <= room_last; i++) {
+    if(room_exists(i)) {    
+        Trace(room_get_name(i));
+        room_set_viewport(i,0,true,0,0,view_width,view_height);
+        room_set_view_enabled(i,true);
+    }
+}
+camera_set_view_pos (view_camera[0],x,y);
+camera_set_view_size(view_camera[0],view_width,view_height);
 update();
