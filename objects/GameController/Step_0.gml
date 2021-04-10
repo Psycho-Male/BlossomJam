@@ -17,6 +17,7 @@ if mc_right1{
             if state!=state_normal{
                 state=state_normal;
             }
+            if !instance_exists(obj_hitbox) GetHitbox(x,y,id);
         }
     }
 }

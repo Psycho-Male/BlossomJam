@@ -1,14 +1,7 @@
-//AddGuiMessage("x: "+str(x));
-//AddGuiMessage("y: "+str(y));
-//AddGuiMessage("width: "+str(width));
-//AddGuiMessage("height: "+str(height));
-//AddGuiMessage("focus_instance: "+str(focus_instance));
-//AddGuiMessage("view_camera[0]: "+str(view_camera[0]));
-//AddGuiMessage("active camera: "+str(camera_get_active()));
-//AddGuiMessage("view_enabled: "+str(view_enabled));
-//AddGuiMessage("Collision: "+str(layer_tilemap_get_id(layer_get_id("Collision"))));
-//AddGuiMessage("BG: "+str(layer_tilemap_get_id(layer_get_id("BG"))));
-with Player{
+if !GameController.debug{
+    exit;
+}
+if instance_exists(Player) with Player{
     AddGuiMessage("Hsp: "+str(hsp));
     AddGuiMessage("Vsp "+str(vsp));
     AddGuiMessage("hlock: "+str(hlock));
@@ -21,20 +14,19 @@ with Player{
     AddGuiMessage("coyt: "+str(coyt));
     AddGuiMessage("jump_buff_block: "+str(jump_buff_block));
     AddGuiMessage("air_dashed: "+str(air_dashed));
+    AddGuiMessage("hp: "+str(hp));
 }
-with Input{
+if instance_exists(Input) with Input{
     AddGuiMessage("hlock: "+str(hlock));
     AddGuiMessage("vlock: "+str(vlock));
     AddGuiMessage("action_lock: "+str(action_lock));
 }
-with Enemy{
+if instance_exists(Enemy) with Enemy{
     AddGuiMessage("Enemy hsp: "+str(hsp));
     AddGuiMessage("normal.t: "+str(normal.t));
     AddGuiMessage("Enemy State: "+str(state_name));
 }
-if GameController.debug{
-    draw_set_halign(fa_left);
-    for(var i=0;i<array_length(gui_message);i++){
-        draw_text(0,16*i,gui_message[i]);
-    }
+draw_set_halign(fa_left);
+for(var i=0;i<array_length(gui_message);i++){
+    draw_text(0,16*i,gui_message[i]);
 }

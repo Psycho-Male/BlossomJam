@@ -40,8 +40,8 @@
     "TileSerialiseData": [],
   },
   "parent": {
-    "name": "BlossomJam",
-    "path": "BlossomJam.yyp",
+    "name": "Map",
+    "path": "folders/Map.yy",
   },
   "resourceVersion": "1.0",
   "name": "tileset_collision",

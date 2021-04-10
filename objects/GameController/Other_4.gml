@@ -5,4 +5,6 @@ if room==rm_init{
         }
     }
     room_goto(rm_stage1);
+    //bgm=audio_play_sound(au_music1,1,true);
+    //audio_sound_gain(bgm,.5,0);
 }

@@ -51,6 +51,28 @@ drop_buffer=drop_buffer_reset;
 vcenter=0;
 jump_buff_block=false;
 air_dashed=false;
+hp=3;
+onground=true;
+jump_force=8;
+shot=false;
+//---------\\
+//Functions||
+//--------//
+function jump_buffer(){
+    if (inpJump)&&!jump_buff_block{
+        jumping=jumping_reset;
+    }
+}
+function ground_check(_low){
+    if is_undefined(_low) _low=false;
+    if !onground{
+        vsp=_low?grav_low:grav;
+        //grav+=_low?grav_v:grav_v;
+        if onground{
+            touchdown();
+        }
+    }
+}
 function lock_movement(_hlock,_vlock){
     hlock=_hlock;
     vlock=_vlock;
@@ -88,10 +110,68 @@ function hsp_approach(_target,_spd){
     hsp=hsp_target;
     hsp_target=approach(hsp_target,_target,_spd);
 }
+//---------------\\
+//Above Collision||
+//--------------//
+function above_collision(){
+    if vsp<0&&place_meeting(x,idAbove+vsp,Collision){
+        while !place_meeting(x,idAbove,Collision){
+            y--;
+        }
+        jumping=false;
+        vsp=0;
+        jump_buff_block=true;
+        return true;
+    }
+}
+//----------------\\
+//Ground Collision||
+//---------------//
+function ground_collision(){
+    if !onground{
+        onground=position_meeting(x,y+vsp,Collision);//||position_meeting(x,y+vsp,Slope);
+        if onground{
+            while !position_meeting(x,y,Collision){
+                y++;
+            }
+            vsp=0;
+        }
+    }else{
+        if position_meeting(x,y+vsp,Collision){
+            coyt=coyt_reset;
+            onground=true;
+        }else{
+            onground=coyt>0;
+            coyt--;
+        }
+    }
+}
+function jump(){
+    if onground&&(inpJump){
+        jump_buffer();
+        //grav_v=.01;
+        return true;
+    }else{
+        return false;
+    }
+}
+function touchdown(){
+    jump_buff_block=false;
+    vsp=0;
+    state=state_normal;
+    grav=grav_reset;
+    drop_buffer=drop_buffer_reset;
+    if jumping>1{
+        jump();
+    }else{
+        jumping=false;
+    }
+    air_dashed=false;
+}
 //----\\
 //DASH||
 //---//
-dash_force=8;
+dash_force=6;
 function dash(){
     if Input.dash{
         if state==state_jump||state==state_drop{
@@ -109,6 +189,117 @@ function dash(){
         return true;
     }else{
         return false;
+    }
+}
+function immunity_check(){
+    with immunity{
+        if active{
+            other.image_alpha=.5;
+            if t<=0{
+                active=false;
+                reset();
+            }
+            t--;
+            return true;
+        }else{
+            other.image_alpha=1;
+            return false;
+        }
+    }
+}
+function hit(){
+    immunity.active=true;
+    jumping=false;
+    vsp=0;
+    if instance_exists(hurt.by){
+        hsp+=hurt.hforce*sign(x-hurt.by.x);
+        vsp+=hurt.vforce;
+    }
+    hp--;
+    if hp<=0{
+        state=state_death;
+    }else{
+        state=state_hurt_recover;
+    }
+}
+function set_dir(){
+    var _dir=Input.right-Input.left;
+    if _dir!=0 image_xscale=_dir;
+}
+function state_precharge(){
+    lock_movement(true,false);
+    InputLock(false,true);
+    ground_check(true);
+    move();
+    sprite_index=sprite.precharge;
+    set_dir();
+    if animEnd{
+        if Input.action1{
+            state=state_charge;
+        }else{
+            state=state_attack;
+        }
+    }
+}
+//-------\\
+//Structs||
+//------//
+charge={
+    mx:10,
+    mn:6,
+    v:.1,
+    current:6,
+    tt:30,
+    t:0,
+    func:function(){
+        if Input.action1{
+            with other{
+                if state!=state_charge{
+                    image_index=0;
+                    vsp=0;
+                    jumping=false;
+                    state=state_precharge;
+                }
+            }
+            return true;
+        }else{
+            return false;
+        }
+    },
+}
+hurt={
+    by:noone,
+    vforce:2,
+    hforce:5,
+    tt:5,
+    t:5,
+}
+immunity={
+    active:false,
+    tt:120,
+    t:120,
+    reset:function(){
+        t=tt;
+    }
+}
+//------\\
+//States||
+//------//
+function state_normal(){
+    lock_movement(false,false);
+    if charge.func(){
+        exit;
+    }
+    move();
+    state_text="Normal";
+    jump();
+    dash();
+    sprite_index=hsp==0?sprite.idle:sprite.run;
+    if jumping{
+        state=state_jump;
+        vsp-=jump_force;
+    }else if !onground{
+        state=state_drop;
     }
 }
 function state_dash(){
@@ -152,90 +343,6 @@ function state_dash_recover(){
         state=state_normal;
     }
 }
-//----------\\
-//HCollision||
-//---------//
-//---------------\\
-//Above Collision||
-//--------------//
-function above_collision(){
-    if vsp<0&&place_meeting(x,idAbove+vsp,Collision){
-        while !place_meeting(x,idAbove,Collision){
-            y--;
-        }
-        jumping=false;
-        vsp=0;
-        jump_buff_block=true;
-        return true;
-    }
-}
-//----------------\\
-//Ground Collision||
-//---------------//
-function ground_collision(){
-    if !onground{
-        onground=position_meeting(x,y+vsp,Collision);//||position_meeting(x,y+vsp,Slope);
-        if onground{
-            //var _col=position_meeting(x,y+vsp,Collision)?instance_position(x,y+vsp,Collision):instance_position(x,y+vsp,Slope);
-            while !position_meeting(x,y,Collision){
-                y++;
-            }
-            vsp=0;
-        }
-    }else{
-        if position_meeting(x,y+vsp,Collision){
-            coyt=coyt_reset;
-            onground=true;
-        }else{
-            onground=coyt>0;
-            coyt--;
-        }
-    }
-}
-//--------------------------------------------------\\
-//||
-//--------------------------------------------------//
-function jump(){
-    if onground&&(inpJump){
-        jump_buffer();
-        //grav_v=.01;
-        return true;
-    }else{
-        return false;
-    }
-}
-function touchdown(){
-    jump_buff_block=false;
-    vsp=0;
-    state=state_normal;
-    grav=grav_reset;
-    drop_buffer=drop_buffer_reset;
-    if jumping>1{
-        jump();
-    }else{
-        jumping=false;
-    }
-    air_dashed=false;
-}
-onground=true;
-jump_force=8;
-function state_normal(){
-    lock_movement(false,false);
-    if charge.func(){
-        exit;
-    }
-    move();
-    state_text="Normal";
-    jump();
-    dash();
-    sprite_index=hsp==0?sprite.idle:sprite.run;
-    if jumping{
-        state=state_jump;
-        vsp-=jump_force;
-    }else if !onground{
-        state=state_drop;
-    }
-}
 function state_jump(){
     lock_movement(false,false);
     if charge.func()||dash(){
@@ -271,31 +378,6 @@ function state_drop(){
         touchdown();
     }
 }
-hurt={
-    by:noone,
-    vforce:2,
-    hforce:5,
-    tt:5,
-    t:5,
-}
-immunity={
-    active:false,
-    tt:120,
-    t:120,
-    reset:function(){
-        t=tt;
-    }
-}
-function hit(){
-    immunity.active=true;
-    jumping=false;
-    vsp=0;
-    if instance_exists(hurt.by){
-        hsp+=hurt.hforce*sign(x-hurt.by.x);
-        vsp+=hurt.vforce;
-    }
-    state=state_hurt_recover;
-}
 function state_hurt_recover(){
     lock_movement(false,false);
     sprite_index=sprite.hurt;
@@ -305,66 +387,15 @@ function state_hurt_recover(){
         hurt.t=hurt.tt;
     }
 }
-function immunity_check(){
-    with immunity{
-        if active{
-            other.image_alpha=.5;
-            if t<=0{
-                active=false;
-                reset();
-            }
-            t--;
-            return true;
-        }else{
-            other.image_alpha=1;
-            return false;
-        }
-    }
-}
-//------\\
-//Attack||
-//-----//
-function set_dir(){
-    var _dir=Input.right-Input.left;
-    if _dir!=0 image_xscale=_dir;
-}
-function state_precharge(){
-    lock_movement(true,false);
-    InputLock(false,true);
-    ground_check(true);
-    move();
-    sprite_index=sprite.precharge;
-    set_dir();
+function state_death(){
+    lock_movement(true,true);
+    immunity.active=false;
+    image_alpha=1;
+    sprite_index=sprite.death;
     if animEnd{
-        if Input.action1{
-            state=state_charge;
-        }else{
-            state=state_attack;
-        }
+        instance_destroy(all);
+        room_goto(rm_init);
     }
-}
-charge={
-    mx:10,
-    mn:6,
-    v:.1,
-    current:6,
-    tt:30,
-    t:0,
-    func:function(){
-        if Input.action1{
-            with other{
-                if state!=state_charge{
-                    image_index=0;
-                    vsp=0;
-                    jumping=false;
-                    state=state_precharge;
-                }
-            }
-            return true;
-        }else{
-            return false;
-        }
-    },
 }
 function state_charge(){
     lock_movement(true,false);
@@ -389,10 +420,10 @@ function state_charge(){
     }
     if !Input.action1{
         Camera.rumble.reset();
+        image_index=0;
         state=state_attack;
     }
 }
-shot=false;
 function state_attack(){
     lock_movement(true,false);
     InputLock(true,true);
@@ -411,19 +442,4 @@ function state_attack(){
         InputRelease();
     }
 }
-function ground_check(_low){
-    if is_undefined(_low) _low=false;
-    if !onground{
-        vsp=_low?grav_low:grav;
-        //grav+=_low?grav_v:grav_v;
-        if onground{
-            touchdown();
-        }
-    }
-}
 state=state_normal;
-function jump_buffer(){
-    if (inpJump)&&!jump_buff_block{
-        jumping=jumping_reset;
-    }
-}
