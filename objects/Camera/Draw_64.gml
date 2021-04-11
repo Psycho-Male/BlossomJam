@@ -31,9 +31,7 @@ if instance_exists(Enemy) with Enemy{
     AddGuiMessage("Enemy State: "+str(state_name));
 }
 AddGuiMessage("xoff: "+str(xoff));
-AddGuiMessage("xoff*(10/1): "+str(xoff*(10/1)));
-AddGuiMessage("xoff*(10/2): "+str(xoff*(10/2)));
-AddGuiMessage("xoff*(10/3): "+str(xoff*(10/3)));
+//AddGuiMessage("yoff: "+str(yoff));
 draw_set_halign(fa_left);
 for(var i=0;i<array_length(gui_message);i++){
     draw_text(0,16*i,gui_message[i]);

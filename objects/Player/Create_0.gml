@@ -180,6 +180,7 @@ function corner_check(){
             return false;
         }
         if instance_exists(corner){
+            if corner.image_xscale!=image_xscale*-1 return false;
             vsp=0;hsp=0;
             air_dashed=false;
             var _dir=sign(corner.x-x);
