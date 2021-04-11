@@ -8,6 +8,10 @@ if debug{
             }
         }
     }
+    if kp_r{
+        instance_destroy(all);
+        room_goto(rm_init);
+    }
 }
 if mc_right1{
     if !instance_exists(Void){
