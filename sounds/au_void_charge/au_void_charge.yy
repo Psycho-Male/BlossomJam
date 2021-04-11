@@ -11,7 +11,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "au_void_charge.wav",
-  "duration": 2.200313,
+  "duration": 18.505,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",

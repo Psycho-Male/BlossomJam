@@ -51,3 +51,7 @@ if kp_m{
         sound_off=true;
     }
 }
+if room==rm_end{
+    InputLock(true,true);
+    InputActionLock();
+}

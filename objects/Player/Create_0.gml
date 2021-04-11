@@ -67,6 +67,7 @@ function detect_trap(){
     if immunity.active return false;
     var _trap=instance_position(x,y,Trap);
     if instance_exists(_trap){
+        _trap.triggered=true;
         hit();
         return true;
     }
@@ -74,6 +75,12 @@ function detect_trap(){
 }
 function hit(){
     SfxPlay(choose(au_hit1,au_hit2,au_hit3));
+    if audio_is_playing(au_void_charge){
+        audio_stop_sound(au_void_charge);
+    }
+    if audio_is_playing(au_void_charge_hold){
+        audio_stop_sound(au_void_charge_hold);
+    }
     InputRelease();
     InputActionRelease();
     immunity.active=true;
@@ -106,8 +113,10 @@ function collectible_detect(){
     if instance_exists(_pickup){
         switch _pickup.object_index{
             case obj_health_pickup:
+            SfxPlay(au_pickup1);
             hp++;
             break;case obj_charge_pickup:
+            SfxPlay(au_pickup2);
             give_powerup();
             break;
         }
@@ -540,6 +549,9 @@ function state_precharge(){
     move();
     sprite_index=sprite.precharge;
     set_dir();
+    if !audio_is_playing(au_void_charge){
+        SfxPlay(au_void_charge);
+    }
     if animEnd||charge.powerup{
         if Input.action1{
             state=state_charge;
@@ -558,11 +570,26 @@ function state_charge(){
         //if !audio_is_playing(au_void_charge){
         //    SfxPlay(au_void_charge);
         //}
+        if !audio_is_playing(au_void_charge_hold){
+            SfxPlay(au_void_charge_hold);
+        }
         charge.current=charge.mx;
     }else{
         //if !audio_is_playing(au_void_charge){
         //    SfxPlay(au_void_charge);
         //}
+        if charge.current!=charge.mx{
+            if !audio_is_playing(au_void_charge){
+                SfxPlay(au_void_charge);
+            }
+        }else{
+            if !audio_is_playing(au_void_charge_hold){
+                if audio_is_playing(au_void_charge){
+                    audio_stop_sound(au_void_charge);
+                }
+                SfxPlay(au_void_charge_hold);
+            }
+        }
         charge.current=approach(charge.current,charge.mx,charge.v);
     }
     AddGuiMessage("charge.current: "+str(charge.current));
@@ -588,6 +615,12 @@ function state_charge(){
 function state_attack(){
     lock_movement(true,false);
     InputLock(true,true);
+    if audio_is_playing(au_void_charge){
+        audio_stop_sound(au_void_charge);
+    }
+    if audio_is_playing(au_void_charge_hold){
+        audio_stop_sound(au_void_charge_hold);
+    }
     ground_check(true);
     move();
     sprite_index=sprite.attack;

@@ -10,8 +10,8 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "au_mushroom_bounce",
-  "duration": 0.0,
+  "soundFile": "au_mushroom_bounce.wav",
+  "duration": 1.13,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",
