@@ -4,6 +4,7 @@ function state_normal(){
     sprite_index=sprite_normal;
     if bounce{
         state=state_bounce;
+        SfxPlay(au_mushroom_bounce);
     }
 }
 function state_bounce(){

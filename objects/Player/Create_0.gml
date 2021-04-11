@@ -461,7 +461,7 @@ function state_drop(){
         drop_buffer--;
     }
     vsp+=grav;
-    grav+=grav_v;
+    //grav+=grav_v;
     if onground{
         touchdown();
     }else{
