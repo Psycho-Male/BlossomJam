@@ -427,7 +427,19 @@ function state_drop(){
 function state_hang(){
     lock_movement(true,true);
     sprite_index=sprite.corner_grab;
-    if kp_a||kp_d{
+    var _release=false;
+    if image_xscale==1{
+        if kp_a{
+            x-=8;
+            _release=true;
+        }
+    }else{
+        if kp_d{
+            x+=8;
+            _release=true;
+        }
+    }
+    if _release{
         corner=noone;
         state=state_drop;
     }
