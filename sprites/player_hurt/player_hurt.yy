@@ -26,8 +26,6 @@
   "frames": [
     {"compositeImage":{"FrameId":{"name":"b5567123-eaa4-4944-bed0-62418986203c","path":"sprites/player_hurt/player_hurt.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"b5567123-eaa4-4944-bed0-62418986203c","path":"sprites/player_hurt/player_hurt.yy",},"LayerId":{"name":"e19e3da8-81bc-4394-a93f-8ab71dd11e28","path":"sprites/player_hurt/player_hurt.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-        {"FrameId":{"name":"b5567123-eaa4-4944-bed0-62418986203c","path":"sprites/player_hurt/player_hurt.yy",},"LayerId":{"name":"c1c5dd45-80b4-4493-96b0-d9625e1bb1f6","path":"sprites/player_hurt/player_hurt.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-        {"FrameId":{"name":"b5567123-eaa4-4944-bed0-62418986203c","path":"sprites/player_hurt/player_hurt.yy",},"LayerId":{"name":"0cc99b0a-04bf-4b0f-bc31-dcb68694ef7c","path":"sprites/player_hurt/player_hurt.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"player_hurt","path":"sprites/player_hurt/player_hurt.yy",},"resourceVersion":"1.0","name":"b5567123-eaa4-4944-bed0-62418986203c","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
