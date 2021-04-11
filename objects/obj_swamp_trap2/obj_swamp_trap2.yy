@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "spr_swamp_trap2",
-    "path": "sprites/spr_swamp_trap2/spr_swamp_trap2.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

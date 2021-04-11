@@ -62,7 +62,6 @@
     {"id":{"name":"player_hurt","path":"sprites/player_hurt/player_hurt.yy",},"order":12,},
     {"id":{"name":"Wine","path":"objects/Wine/Wine.yy",},"order":16,},
     {"id":{"name":"wall_leaf8","path":"sprites/wall_leaf8/wall_leaf8.yy",},"order":30,},
-    {"id":{"name":"spr_swamp_trap2_active","path":"sprites/spr_swamp_trap2_active/spr_swamp_trap2_active.yy",},"order":5,},
     {"id":{"name":"au_land","path":"sounds/au_land/au_land.yy",},"order":1,},
     {"id":{"name":"spr_collision_tileset","path":"sprites/spr_collision_tileset/spr_collision_tileset.yy",},"order":12,},
     {"id":{"name":"Trap","path":"objects/Trap/Trap.yy",},"order":0,},
