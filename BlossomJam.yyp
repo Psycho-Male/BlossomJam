@@ -84,6 +84,7 @@
     {"id":{"name":"spr_collision","path":"sprites/spr_collision/spr_collision.yy",},"order":5,},
     {"id":{"name":"spr_wine","path":"sprites/spr_wine/spr_wine.yy",},"order":15,},
     {"id":{"name":"spr_glowymusroom4","path":"sprites/spr_glowymusroom4/spr_glowymusroom4.yy",},"order":15,},
+    {"id":{"name":"rm_stage2","path":"rooms/rm_stage2/rm_stage2.yy",},"order":28,},
     {"id":{"name":"spr_tree9","path":"sprites/spr_tree9/spr_tree9.yy",},"order":8,},
     {"id":{"name":"player_attack","path":"sprites/player_attack/player_attack.yy",},"order":11,},
     {"id":{"name":"obj_hitbox","path":"objects/obj_hitbox/obj_hitbox.yy",},"order":24,},
@@ -132,6 +133,7 @@
   "RoomOrderNodes": [
     {"roomId":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
     {"roomId":{"name":"rm_stage1","path":"rooms/rm_stage1/rm_stage1.yy",},},
+    {"roomId":{"name":"rm_stage2","path":"rooms/rm_stage2/rm_stage2.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Player.yy","order":12,"resourceVersion":"1.0","name":"Player","tags":[],"resourceType":"GMFolder",},
