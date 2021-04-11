@@ -54,4 +54,3 @@ function screenshake(){
 //Parallax||
 //-------//
 layers=noone;
-layerpos=noone;

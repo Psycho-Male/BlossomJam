@@ -8,10 +8,13 @@ camera_set_view_size(view_camera[0],view_width,view_height);
 
 
 
-xoff=(room_width-Player.x)/(room_width/2);
-for(var i=0;i<array_length(layerpos[0]);i++){
-    layer_x(layers[i],xoff*(10/i));
-}
-for(var i=0;i<array_length(layers[0]);i++){
-    layer_y(layers[0][i],Player.y);
+xoff=
+[
+(room_width-x)/10,
+(room_width-x)/20,
+(room_width-x)/30,
+];
+for(var i=0;i<array_length(layers);i++){
+    layer_x(layers[i],xoff[i]);
+    layer_y(layers[i],y-height-13);
 }
