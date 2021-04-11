@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_potral_idle",
+    "path": "sprites/spr_potral_idle/spr_potral_idle.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

@@ -63,6 +63,13 @@ gate_trigger_dist=240;
 //---------\\
 //Functions||
 //--------//
+function detect_portal(){
+    var _portal=instance_position(x,y,Portal)
+    if instance_exists(_portal){
+        _portal.triggered=true;
+        state=state_fade;
+    }
+}
 function give_powerup(){
     charge.powerup=true;
     charge.powerup_t=charge.powerup_treset;
@@ -576,5 +583,11 @@ function state_attack(){
         grav=grav_reset;
         InputRelease();
     }
+}
+function state_fade(){
+    lock_movement(true,true);
+    hsp=0;vsp=0;
+    sprite_index=sprite.idle;
+    image_alpha-=.5;
 }
 state=state_normal;

@@ -1,5 +1,7 @@
 vcenter=y-15;
-immunity_check();
+if state!=state_fade{
+    immunity_check();
+}
 if jumping>1 jumping--;
 sprite.prv=sprite_index;
 state();
@@ -26,4 +28,7 @@ if charge.powerup{
         charge.powerup=false;
     }
     charge.powerup_t--;
+}
+if state!=state_fade{
+    detect_portal();
 }
