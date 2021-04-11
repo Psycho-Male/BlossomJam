@@ -108,6 +108,7 @@
     {"id":{"name":"Player","path":"objects/Player/Player.yy",},"order":0,},
     {"id":{"name":"obj_detector","path":"objects/obj_detector/obj_detector.yy",},"order":8,},
     {"id":{"name":"spr_tree6","path":"sprites/spr_tree6/spr_tree6.yy",},"order":5,},
+    {"id":{"name":"rm_stage3","path":"rooms/rm_stage3/rm_stage3.yy",},"order":30,},
     {"id":{"name":"player_idle","path":"sprites/player_idle/player_idle.yy",},"order":5,},
     {"id":{"name":"enemy1_tired","path":"sprites/enemy1_tired/enemy1_tired.yy",},"order":6,},
     {"id":{"name":"spr_wine2","path":"sprites/spr_wine2/spr_wine2.yy",},"order":10,},
@@ -150,6 +151,7 @@
     {"roomId":{"name":"rm_init","path":"rooms/rm_init/rm_init.yy",},},
     {"roomId":{"name":"rm_stage1","path":"rooms/rm_stage1/rm_stage1.yy",},},
     {"roomId":{"name":"rm_stage2","path":"rooms/rm_stage2/rm_stage2.yy",},},
+    {"roomId":{"name":"rm_stage3","path":"rooms/rm_stage3/rm_stage3.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Player.yy","order":13,"resourceVersion":"1.0","name":"Player","tags":[],"resourceType":"GMFolder",},
