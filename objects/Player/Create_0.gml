@@ -62,6 +62,21 @@ wine_prevent=false;
 //---------\\
 //Functions||
 //--------//
+function check_mushroom(){
+    var _mushroom=instance_position(x,y,par_bouncy_mushroom);
+    if instance_exists(_mushroom){
+        _mushroom.bounce=true;
+        vsp=-_mushroom.bounce_force;
+        grav=grav_reset;
+        onground=true;
+        jump_buff_block=false;
+        air_dashed=false;
+        wine_prevent=false;
+        jumping=true;
+        return true;
+    }
+    return false;
+}
 function jump_buffer(){
     if (inpJump)&&!jump_buff_block{
         jumping=jumping_reset;
@@ -403,7 +418,7 @@ function state_jump(){
 }
 function state_drop(){
     lock_movement(false,false);
-    if charge.func()||dash(){
+    if charge.func()||dash()||check_mushroom(){
         exit;
     }
     jump_buffer();
@@ -453,7 +468,7 @@ function state_wine_hang(){
     lock_movement(true,false);
     sprite_index=sprite.wine_grab;
     if (kp_w||kp_k)&&(Input.left||Input.right){
-        wine_prevent=true;
+        //wine_prevent=true;
         jumping=true;
         state=state_jump;
         vsp-=jump_force;

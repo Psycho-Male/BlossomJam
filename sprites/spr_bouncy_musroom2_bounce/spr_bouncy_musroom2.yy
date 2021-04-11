@@ -10,12 +10,12 @@
   "bbox_left": 0,
   "bbox_right": 31,
   "bbox_top": 0,
-  "bbox_bottom": 31,
+  "bbox_bottom": 28,
   "HTile": false,
   "VTile": false,
   "For3D": false,
   "width": 32,
-  "height": 32,
+  "height": 29,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"5b279fd6-dae5-4076-af35-7693e09fadb9","path":"sprites/spr_blank/spr_blank.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"5b279fd6-dae5-4076-af35-7693e09fadb9","path":"sprites/spr_blank/spr_blank.yy",},"LayerId":{"name":"d10f16e7-39c8-4fac-9606-217c0c3e32ca","path":"sprites/spr_blank/spr_blank.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_blank","path":"sprites/spr_blank/spr_blank.yy",},"resourceVersion":"1.0","name":"5b279fd6-dae5-4076-af35-7693e09fadb9","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"7b4a8dd7-04ef-4a42-853a-c1d4d95c197f","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"7b4a8dd7-04ef-4a42-853a-c1d4d95c197f","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},"LayerId":{"name":"fa33aeab-6106-4cc2-889e-4fa8c3cc05f3","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_bouncy_musroom2","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},"resourceVersion":"1.0","name":"7b4a8dd7-04ef-4a42-853a-c1d4d95c197f","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"spr_blank","path":"sprites/spr_blank/spr_blank.yy",},
+    "spriteId": {"name":"spr_bouncy_musroom2","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 0.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"45445728-4691-4aaf-a79f-4430b2c5df6f","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"5b279fd6-dae5-4076-af35-7693e09fadb9","path":"sprites/spr_blank/spr_blank.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"8adebc81-1924-4d8a-a2dd-7b6d4f8adb52","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"7b4a8dd7-04ef-4a42-853a-c1d4d95c197f","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -55,25 +55,25 @@
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
     "xorigin": 16,
-    "yorigin": 32,
+    "yorigin": 29,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"spr_blank","path":"sprites/spr_blank/spr_blank.yy",},
+    "parent": {"name":"spr_bouncy_musroom2","path":"sprites/spr_bouncy_musroom2/spr_bouncy_musroom2.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_blank",
+    "name": "spr_bouncy_musroom2",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"d10f16e7-39c8-4fac-9606-217c0c3e32ca","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"fa33aeab-6106-4cc2-889e-4fa8c3cc05f3","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
-    "name": "BlossomJam",
-    "path": "BlossomJam.yyp",
+    "name": "Mushrooms",
+    "path": "folders/Map/Mushrooms.yy",
   },
   "resourceVersion": "1.0",
-  "name": "spr_blank",
+  "name": "spr_bouncy_musroom2",
   "tags": [],
   "resourceType": "GMSprite",
 }
