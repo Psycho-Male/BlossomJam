@@ -13,3 +13,10 @@ if kp_h{
 }
 AddGuiMessage("x: "+str(x));
 AddGuiMessage("y: "+str(y));
+if x>room_width||y>room_height{
+    with SpawnPoint{
+        other.hp--;
+        other.x=x;
+        other.y=y;
+    }
+}
