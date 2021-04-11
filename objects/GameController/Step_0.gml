@@ -1,3 +1,7 @@
+if kp_u{
+    instance_destroy(all);
+    room_goto(rm_init);
+}
 if debug{
     if kp_o{
         if room==room_last{
@@ -7,10 +11,6 @@ if debug{
                 room_goto_next();
             }
         }
-    }
-    if kp_r{
-        instance_destroy(all);
-        room_goto(rm_init);
     }
 }
 if mc_right1{
