@@ -8,7 +8,7 @@ FrameCheck();
 ground_collision();
 if !hlock x+=hsp;
 if !vlock y+=vsp;
-if kp_h{
+if GameController.debug&&kp_h{
     hit(noone);
 }
 AddGuiMessage("x: "+str(x));

@@ -24,11 +24,11 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [],
-  "properties": [
-    {"varType":5,"value":"spr_corrupt_tree_idle","rangeEnabled":false,"rangeMin":0.0,"rangeMax":10.0,"listItems":[],"multiselect":false,"filters":[],"resourceVersion":"1.0","name":"spr_idle","tags":[],"resourceType":"GMObjectProperty",},
-    {"varType":5,"value":"spr_corrupt_tree_active","rangeEnabled":false,"rangeMin":0.0,"rangeMax":10.0,"listItems":[],"multiselect":false,"filters":[],"resourceVersion":"1.0","name":"spr_active","tags":[],"resourceType":"GMObjectProperty",},
+  "properties": [],
+  "overriddenProperties": [
+    {"propertyId":{"name":"spr_idle","path":"objects/par_gate/par_gate.yy",},"objectId":{"name":"par_gate","path":"objects/par_gate/par_gate.yy",},"value":"spr_corrupt_tree_idle","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"spr_active","path":"objects/par_gate/par_gate.yy",},"objectId":{"name":"par_gate","path":"objects/par_gate/par_gate.yy",},"value":"spr_corrupt_tree_active","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
-  "overriddenProperties": [],
   "parent": {
     "name": "Map",
     "path": "folders/Map.yy",

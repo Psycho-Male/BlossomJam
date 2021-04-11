@@ -91,7 +91,7 @@ function jump_buffer(){
 function ground_check(_low){
     if is_undefined(_low) _low=false;
     if !onground&&corner==noone{
-        vsp=_low?grav_low:grav;
+        if _low vsp=grav_low;
         //grav+=_low?grav_v:grav_v;
         if onground{
             touchdown();
@@ -479,7 +479,7 @@ function state_wine_hang(){
         state=state_jump;
         vsp-=jump_force;
     }else if Input.up||Input.down{
-        vsp=(Input.down-Input.up)/2;
+        vsp=(Input.down-Input.up);
         if !position_meeting(x,y,Wine){
             state=state_drop;
         }
