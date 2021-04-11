@@ -50,7 +50,7 @@
     "spriteId": {"name":"spr_cutscene_end1","path":"sprites/spr_cutscene_end1/spr_cutscene_end1.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 0.01,
+    "playbackSpeed": 0.02,
     "playbackSpeedType": 1,
     "autoRecord": true,
     "volume": 1.0,

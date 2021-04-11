@@ -10,8 +10,8 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "au_void_charge_hold",
-  "duration": 0.0,
+  "soundFile": "au_void_charge_hold.wav",
+  "duration": 0.505,
   "parent": {
     "name": "SFX",
     "path": "folders/SFX.yy",

@@ -47,7 +47,7 @@
     "spriteId": {"name":"spr_cutscene_end3","path":"sprites/spr_cutscene_end3/spr_cutscene_end3.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 0.01,
+    "playbackSpeed": 0.02,
     "playbackSpeedType": 1,
     "autoRecord": true,
     "volume": 1.0,
