@@ -30,8 +30,17 @@ if instance_exists(Enemy) with Enemy{
     AddGuiMessage("normal.t: "+str(normal.t));
     AddGuiMessage("Enemy State: "+str(state_name));
 }
+
 AddGuiMessage("xoff: "+str(xoff));
-//AddGuiMessage("yoff: "+str(yoff));
+AddGuiMessage("Camera X: "+str(x));
+AddGuiMessage("Camera Y: "+str(y));
+AddGuiMessage("view_width: "+str(view_width));
+AddGuiMessage("view_height: "+str(view_height));
+for(var i=0;i<array_length(layers);i++){
+    AddGuiMessage("layer_get_x(layers[i]): "+str(layer_get_x(layers[i])));
+    AddGuiMessage("layer_get_y(layers[i]): "+str(layer_get_y(layers[i])));
+}
+
 draw_set_halign(fa_left);
 for(var i=0;i<array_length(gui_message);i++){
     draw_text(0,16*i,gui_message[i]);
