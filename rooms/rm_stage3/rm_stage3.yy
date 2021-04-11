@@ -408,8 +408,8 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "BlossomJam",
-    "path": "BlossomJam.yyp",
+    "name": "Rooms",
+    "path": "folders/Rooms.yy",
   },
   "resourceVersion": "1.0",
   "name": "rm_stage3",

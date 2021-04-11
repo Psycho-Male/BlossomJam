@@ -296,7 +296,7 @@ function dash(){
                 return false;
             }
         }
-        //SfxPlay(sfx_dash);
+        SfxPlay(sfx_dash);
         hsp_target=sign(image_xscale)*dash_force;
         state=state_dash;
         vsp=0;
