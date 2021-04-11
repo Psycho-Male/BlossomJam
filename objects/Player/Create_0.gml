@@ -63,6 +63,30 @@ gate_trigger_dist=240;
 //---------\\
 //Functions||
 //--------//
+function detect_trap(){
+    if immunity.active return false;
+    var _trap=instance_position(x,y,Trap);
+    if instance_exists(_trap){
+        hit();
+        return true;
+    }
+    return false;
+}
+function hit(){
+    immunity.active=true;
+    jumping=false;
+    vsp=0;
+    if instance_exists(hurt.by){
+        hsp+=hurt.hforce*sign(x-hurt.by.x);
+        vsp+=hurt.vforce;
+    }
+    hp--;
+    if hp<=0{
+        state=state_death;
+    }else{
+        state=state_hurt_recover;
+    }
+}
 function detect_portal(){
     var _portal=instance_position(x,y,Portal)
     if instance_exists(_portal){
@@ -292,21 +316,6 @@ function immunity_check(){
             other.image_alpha=1;
             return false;
         }
-    }
-}
-function hit(){
-    immunity.active=true;
-    jumping=false;
-    vsp=0;
-    if instance_exists(hurt.by){
-        hsp+=hurt.hforce*sign(x-hurt.by.x);
-        vsp+=hurt.vforce;
-    }
-    hp--;
-    if hp<=0{
-        state=state_death;
-    }else{
-        state=state_hurt_recover;
     }
 }
 function set_dir(){

@@ -1,15 +1,12 @@
 {
-  "spriteId": {
-    "name": "spr_spawn_trap1",
-    "path": "sprites/spr_spawn_trap1/spr_spawn_trap1.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "par_trap",
-    "path": "objects/par_trap/par_trap.yy",
+    "name": "Trap",
+    "path": "objects/Trap/Trap.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -31,7 +28,7 @@
     "path": "folders/Map/Traps.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_spawm_trap1",
+  "name": "obj_swamp_trap2",
   "tags": [],
   "resourceType": "GMObject",
 }

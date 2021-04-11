@@ -10,7 +10,7 @@ FrameCheck();
 ground_collision();
 if !hlock x+=hsp;
 if !vlock y+=vsp;
-if GameController.debug&&kp_h{
+if instance_exists(GameController)&&GameController.debug&&kp_h{
     hit(noone);
 }
 AddGuiMessage("x: "+str(x));
@@ -32,3 +32,4 @@ if charge.powerup{
 if state!=state_fade{
     detect_portal();
 }
+detect_trap();
