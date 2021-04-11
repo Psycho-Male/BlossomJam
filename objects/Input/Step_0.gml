@@ -14,3 +14,5 @@ if !action_lock{
 }
 any_pressed=kp_anykey;
 any=kc_anykey;
+AddGuiMessage("Input hlock: "+str(hlock));
+AddGuiMessage("Input vlock: "+str(vlock));

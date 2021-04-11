@@ -5,6 +5,9 @@ if room==rm_init{
         }
     }
     room_goto(room_begin);
-    //bgm=audio_play_sound(au_music1,1,true);
-    //audio_sound_gain(bgm,.5,0);
+    audio_group_set_gain(audiogroup_default,.5,0);
+    if bgm==noone||!audio_is_playing(au_music1){
+        bgm=audio_play_sound(au_music1,1,true);
+    }
+    audio_sound_gain(bgm,.5,0);
 }

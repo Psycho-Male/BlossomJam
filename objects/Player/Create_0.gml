@@ -73,6 +73,9 @@ function detect_trap(){
     return false;
 }
 function hit(){
+    SfxPlay(choose(au_hit1,au_hit2,au_hit3));
+    InputRelease();
+    InputActionRelease();
     immunity.active=true;
     jumping=false;
     vsp=0;
@@ -223,6 +226,7 @@ function jump(){
     }
 }
 function touchdown(){
+    SfxPlay(au_land);
     jump_buff_block=false;
     vsp=0;
     state=state_normal;
@@ -549,6 +553,9 @@ function state_charge(){
     InputLock(false,true);
     ground_check(true);
     move();
+    if !audio_is_playing(au_void_charge){
+        SfxPlay(au_void_charge);
+    }
     Camera.screenshake();
     if charge.powerup{
         charge.current=charge.mx;

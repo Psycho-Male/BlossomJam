@@ -8,3 +8,4 @@ GUI,
 debug=false;
 bgm=noone;
 draw_set_font(fnt1);
+sound_off=false;

@@ -42,3 +42,12 @@ if mp_left1&&kc_shift{
 if kp_tab{
     debug=!debug;
 }
+if kp_m{
+    if sound_off{
+        audio_group_set_gain(audiogroup_default,.5,0);
+        sound_off=false;
+    }else{
+        audio_group_set_gain(audiogroup_default,0,0);
+        sound_off=true;
+    }
+}
