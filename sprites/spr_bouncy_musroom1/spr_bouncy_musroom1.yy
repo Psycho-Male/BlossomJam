@@ -26,6 +26,7 @@
   "frames": [
     {"compositeImage":{"FrameId":{"name":"7a005992-96c2-45ed-9eac-e90dfa42ee9b","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"7a005992-96c2-45ed-9eac-e90dfa42ee9b","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"LayerId":{"name":"a0b16e18-587d-4857-a862-49d5f18bfd0a","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"7a005992-96c2-45ed-9eac-e90dfa42ee9b","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"LayerId":{"name":"0a29fd5a-10f2-46e0-bf6a-5fb4ae1b11b1","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_bouncy_musroom1","path":"sprites/spr_bouncy_musroom1/spr_bouncy_musroom1.yy",},"resourceVersion":"1.0","name":"7a005992-96c2-45ed-9eac-e90dfa42ee9b","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
