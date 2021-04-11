@@ -47,7 +47,7 @@
     "spriteId": {"name":"enemy1_tired","path":"sprites/enemy1_tired/enemy1_tired.yy",},
     "timeUnits": 1,
     "playback": 1,
-    "playbackSpeed": 0.0,
+    "playbackSpeed": 0.15,
     "playbackSpeedType": 1,
     "autoRecord": true,
     "volume": 1.0,

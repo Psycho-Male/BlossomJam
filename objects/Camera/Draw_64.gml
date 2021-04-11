@@ -1,6 +1,9 @@
 if !GameController.debug{
     exit;
 }
+draw_set_color(c_black);
+draw_rectangle(0,0,width/4,height*4,false);
+draw_set_color(c_white);
 if instance_exists(Player) with Player{
     AddGuiMessage("Hsp: "+str(hsp));
     AddGuiMessage("Vsp "+str(vsp));
@@ -27,6 +30,10 @@ if instance_exists(Enemy) with Enemy{
     AddGuiMessage("normal.t: "+str(normal.t));
     AddGuiMessage("Enemy State: "+str(state_name));
 }
+AddGuiMessage("xoff: "+str(xoff));
+AddGuiMessage("xoff*(10/1): "+str(xoff*(10/1)));
+AddGuiMessage("xoff*(10/2): "+str(xoff*(10/2)));
+AddGuiMessage("xoff*(10/3): "+str(xoff*(10/3)));
 draw_set_halign(fa_left);
 for(var i=0;i<array_length(gui_message);i++){
     draw_text(0,16*i,gui_message[i]);

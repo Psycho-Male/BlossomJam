@@ -89,7 +89,7 @@ attack={
 }
 tired={
     t:0,
-    tt:120,
+    tt:180,
     state:function(){
         other.state_name="Tired";
         other.sprite_index=other.spr_tired;

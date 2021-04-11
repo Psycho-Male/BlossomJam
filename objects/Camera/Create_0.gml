@@ -50,3 +50,8 @@ function screenshake(){
     AddGuiMessage("rumble.x: "+str(rumble.x));
     AddGuiMessage("rumble.y: "+str(rumble.y));
 }
+//--------\\
+//Parallax||
+//-------//
+layers=noone;
+layerpos=noone;

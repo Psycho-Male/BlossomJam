@@ -24,6 +24,7 @@ function FrameCheck(){
         sprite.frame_prot=false;
     }else if sprite.prv!=sprite_index{
         image_index=0;
+        image_speed=1;
     }
 }
 function InputLock(_hlock,_vlock){

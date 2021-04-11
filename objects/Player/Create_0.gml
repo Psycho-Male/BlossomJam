@@ -55,7 +55,7 @@ jump_buff_block=false;
 air_dashed=false;
 hp=3;
 onground=true;
-jump_force=8;
+jump_force=9;
 shot=false;
 corner=noone;
 wine_prevent=false;
@@ -168,17 +168,20 @@ function touchdown(){
     wine_prevent=false;
 }
 function corner_check(){
-    if hsp!=0{
-        var _bbox=image_xscale==1?bboxRight:bboxLeft;
+    if Input.left||Input.right{
+        var _bbox=(Input.right-Input.left)==1?bboxRight+2:bboxLeft-2;
         if state==state_drop{
             corner=instance_position(_bbox+hsp,y+vsp,Corner);
         }else if state==state_jump{
-            corner=instance_position(_bbox+hsp,idAbove+vsp,Corner);
+            corner=instance_position(_bbox+hsp,idVCenter+vsp,Corner);
+        }else if state==state_dash{
+            corner=instance_position(_bbox+hsp,idVCenter,Corner);
         }else{
             return false;
         }
         if instance_exists(corner){
             vsp=0;hsp=0;
+            air_dashed=false;
             var _dir=sign(corner.x-x);
             x=_dir==1?corner.bbox_left:corner.bbox_right;
             y=corner.y+sprHalfH;
@@ -193,12 +196,9 @@ function wine_check(){
     if !wine_prevent&&hsp!=0{
         var _bbox=image_xscale==1?bboxRight:bboxLeft;
         var _wine=noone;
-        if state==state_drop||state==state_jump{
-            _wine=instance_position(_bbox+hsp,y+vsp,Wine);
-        }else{
-            return false;
-        }
+        _wine=instance_position(_bbox+hsp,y+vsp,Wine);
         if instance_exists(_wine){
+            air_dashed=false;
             _wine.depth=Player.depth+1;
             vsp=0;hsp=0;
             x=_wine.x;
@@ -345,7 +345,7 @@ function state_normal(){
 }
 function state_dash(){
     lock_movement(false,true);
-    if charge.func(){
+    if charge.func()||wine_check()||corner_check(){
         exit;
     }
     if Input.left{
@@ -449,10 +449,10 @@ function state_wine_hang(){
         if !position_meeting(x,y,Wine){
             state=state_drop;
         }
-        //image_speed=sprite_get_speed(sprite_index);
+        image_speed=1;
     }else{
         vsp=0;
-        //image_speed=0;
+        image_speed=0;
     }
 }
 function state_hurt_recover(){
