@@ -20,3 +20,10 @@ if x>room_width||y>room_height{
         other.y=y;
     }
 }
+collectible_detect();
+if charge.powerup{
+    if charge.powerup_t<=0{
+        charge.powerup=false;
+    }
+    charge.powerup_t--;
+}

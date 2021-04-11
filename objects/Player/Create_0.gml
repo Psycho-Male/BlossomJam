@@ -63,6 +63,23 @@ gate_trigger_dist=240;
 //---------\\
 //Functions||
 //--------//
+function give_powerup(){
+    charge.powerup=true;
+    charge.powerup_t=charge.powerup_treset;
+}
+function collectible_detect(){
+    var _pickup=instance_place(x,y,par_collectible);
+    if instance_exists(_pickup){
+        switch _pickup.object_index{
+            case obj_health_pickup:
+            hp++;
+            break;case obj_charge_pickup:
+            give_powerup();
+            break;
+        }
+        instance_destroy(_pickup);
+    }
+}
 function gate_detect(){
     var _gate=instance_nearest(x,y,par_gate);
     if distance_to_object(_gate)<gate_trigger_dist{
@@ -289,21 +306,6 @@ function set_dir(){
     var _dir=Input.right-Input.left;
     if _dir!=0 image_xscale=_dir;
 }
-function state_precharge(){
-    lock_movement(true,false);
-    InputLock(false,true);
-    ground_check(true);
-    move();
-    sprite_index=sprite.precharge;
-    set_dir();
-    if animEnd{
-        if Input.action1{
-            state=state_charge;
-        }else{
-            state=state_attack;
-        }
-    }
-}
 //-------\\
 //Structs||
 //------//
@@ -314,6 +316,9 @@ charge={
     current:6,
     tt:30,
     t:0,
+    powerup:false,
+    powerup_treset:60*8,
+    powerup_t:60*8,
     func:function(){
         if Input.action1{
             with other{
@@ -508,13 +513,32 @@ function state_death(){
         room_goto(rm_init);
     }
 }
+function state_precharge(){
+    lock_movement(true,false);
+    InputLock(false,true);
+    ground_check(true);
+    move();
+    sprite_index=sprite.precharge;
+    set_dir();
+    if animEnd||charge.powerup{
+        if Input.action1{
+            state=state_charge;
+        }else{
+            state=state_attack;
+        }
+    }
+}
 function state_charge(){
     lock_movement(true,false);
     InputLock(false,true);
     ground_check(true);
     move();
     Camera.screenshake();
-    charge.current=approach(charge.current,charge.mx,charge.v);
+    if charge.powerup{
+        charge.current=charge.mx;
+    }else{
+        charge.current=approach(charge.current,charge.mx,charge.v);
+    }
     AddGuiMessage("charge.current: "+str(charge.current));
     set_dir();
     if charge.current==charge.mx{

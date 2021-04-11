@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_charge_pickup",
+    "path": "sprites/spr_charge_pickup/spr_charge_pickup.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
