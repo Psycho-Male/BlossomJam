@@ -74,7 +74,9 @@ function detect_trap(){
     return false;
 }
 function hit(){
-    SfxPlay(choose(au_hit1,au_hit2,au_hit3));
+    if state!=state_death{
+        SfxPlay(choose(au_hit1,au_hit2,au_hit3));
+    }
     if audio_is_playing(au_void_charge){
         audio_stop_sound(au_void_charge);
     }
