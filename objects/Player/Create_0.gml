@@ -59,9 +59,15 @@ jump_force=9;
 shot=false;
 corner=noone;
 wine_prevent=false;
+gate_trigger_dist=240;
 //---------\\
 //Functions||
 //--------//
+function gate_detect(){
+    var _gate=instance_nearest(x,y,par_gate);
+    if distance_to_object(_gate)<gate_trigger_dist{
+    }
+}
 function check_mushroom(){
     var _mushroom=instance_position(x,y,par_bouncy_mushroom);
     if instance_exists(_mushroom){

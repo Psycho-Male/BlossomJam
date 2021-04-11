@@ -1,3 +1,14 @@
+if debug{
+    if kp_o{
+        if room==room_last{
+            room_goto(rm_stage1);
+        }else{
+            if room_next(room)!=-1{
+                room_goto_next();
+            }
+        }
+    }
+}
 if mc_right1{
     if !instance_exists(Void){
         with instance_create_layer(mouse_x,mouse_y,"Instances",Void){
