@@ -89,8 +89,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "BlossomJam",
-    "path": "BlossomJam.yyp",
+    "name": "Collectibles",
+    "path": "folders/Collectibles.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_heart",

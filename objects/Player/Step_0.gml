@@ -1,5 +1,7 @@
 vcenter=y-15;
-immunity_check();
+if state!=state_fade{
+    immunity_check();
+}
 if jumping>1 jumping--;
 sprite.prv=sprite_index;
 state();
@@ -8,7 +10,7 @@ FrameCheck();
 ground_collision();
 if !hlock x+=hsp;
 if !vlock y+=vsp;
-if kp_h{
+if instance_exists(GameController)&&GameController.debug&&kp_h{
     hit(noone);
 }
 AddGuiMessage("x: "+str(x));
@@ -20,3 +22,14 @@ if x>room_width||y>room_height{
         other.y=y;
     }
 }
+collectible_detect();
+if charge.powerup{
+    if charge.powerup_t<=0{
+        charge.powerup=false;
+    }
+    charge.powerup_t--;
+}
+if state!=state_fade{
+    detect_portal();
+}
+detect_trap();

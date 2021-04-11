@@ -63,6 +63,54 @@ gate_trigger_dist=240;
 //---------\\
 //Functions||
 //--------//
+function detect_trap(){
+    if immunity.active return false;
+    var _trap=instance_position(x,y,Trap);
+    if instance_exists(_trap){
+        hit();
+        return true;
+    }
+    return false;
+}
+function hit(){
+    immunity.active=true;
+    jumping=false;
+    vsp=0;
+    if instance_exists(hurt.by){
+        hsp+=hurt.hforce*sign(x-hurt.by.x);
+        vsp+=hurt.vforce;
+    }
+    hp--;
+    if hp<=0{
+        state=state_death;
+    }else{
+        state=state_hurt_recover;
+    }
+}
+function detect_portal(){
+    var _portal=instance_position(x,y,Portal)
+    if instance_exists(_portal){
+        _portal.triggered=true;
+        state=state_fade;
+    }
+}
+function give_powerup(){
+    charge.powerup=true;
+    charge.powerup_t=charge.powerup_treset;
+}
+function collectible_detect(){
+    var _pickup=instance_place(x,y,par_collectible);
+    if instance_exists(_pickup){
+        switch _pickup.object_index{
+            case obj_health_pickup:
+            hp++;
+            break;case obj_charge_pickup:
+            give_powerup();
+            break;
+        }
+        instance_destroy(_pickup);
+    }
+}
 function gate_detect(){
     var _gate=instance_nearest(x,y,par_gate);
     if distance_to_object(_gate)<gate_trigger_dist{
@@ -91,7 +139,7 @@ function jump_buffer(){
 function ground_check(_low){
     if is_undefined(_low) _low=false;
     if !onground&&corner==noone{
-        vsp=_low?grav_low:grav;
+        if _low vsp=grav_low;
         //grav+=_low?grav_v:grav_v;
         if onground{
             touchdown();
@@ -270,39 +318,9 @@ function immunity_check(){
         }
     }
 }
-function hit(){
-    immunity.active=true;
-    jumping=false;
-    vsp=0;
-    if instance_exists(hurt.by){
-        hsp+=hurt.hforce*sign(x-hurt.by.x);
-        vsp+=hurt.vforce;
-    }
-    hp--;
-    if hp<=0{
-        state=state_death;
-    }else{
-        state=state_hurt_recover;
-    }
-}
 function set_dir(){
     var _dir=Input.right-Input.left;
     if _dir!=0 image_xscale=_dir;
-}
-function state_precharge(){
-    lock_movement(true,false);
-    InputLock(false,true);
-    ground_check(true);
-    move();
-    sprite_index=sprite.precharge;
-    set_dir();
-    if animEnd{
-        if Input.action1{
-            state=state_charge;
-        }else{
-            state=state_attack;
-        }
-    }
 }
 //-------\\
 //Structs||
@@ -314,6 +332,9 @@ charge={
     current:6,
     tt:30,
     t:0,
+    powerup:false,
+    powerup_treset:60*8,
+    powerup_t:60*8,
     func:function(){
         if Input.action1{
             with other{
@@ -479,7 +500,7 @@ function state_wine_hang(){
         state=state_jump;
         vsp-=jump_force;
     }else if Input.up||Input.down{
-        vsp=(Input.down-Input.up)/2;
+        vsp=(Input.down-Input.up);
         if !position_meeting(x,y,Wine){
             state=state_drop;
         }
@@ -508,13 +529,32 @@ function state_death(){
         room_goto(rm_init);
     }
 }
+function state_precharge(){
+    lock_movement(true,false);
+    InputLock(false,true);
+    ground_check(true);
+    move();
+    sprite_index=sprite.precharge;
+    set_dir();
+    if animEnd||charge.powerup{
+        if Input.action1{
+            state=state_charge;
+        }else{
+            state=state_attack;
+        }
+    }
+}
 function state_charge(){
     lock_movement(true,false);
     InputLock(false,true);
     ground_check(true);
     move();
     Camera.screenshake();
-    charge.current=approach(charge.current,charge.mx,charge.v);
+    if charge.powerup{
+        charge.current=charge.mx;
+    }else{
+        charge.current=approach(charge.current,charge.mx,charge.v);
+    }
     AddGuiMessage("charge.current: "+str(charge.current));
     set_dir();
     if charge.current==charge.mx{
@@ -552,5 +592,11 @@ function state_attack(){
         grav=grav_reset;
         InputRelease();
     }
+}
+function state_fade(){
+    lock_movement(true,true);
+    hsp=0;vsp=0;
+    sprite_index=sprite.idle;
+    image_alpha-=.5;
 }
 state=state_normal;
