@@ -91,7 +91,7 @@ function hit(){
     }
 }
 function detect_portal(){
-    var _portal=instance_position(x,y,Portal)
+    var _portal=instance_place(x,y,Portal)
     if instance_exists(_portal){
         _portal.triggered=true;
         state=state_fade;
@@ -553,13 +553,16 @@ function state_charge(){
     InputLock(false,true);
     ground_check(true);
     move();
-    if !audio_is_playing(au_void_charge){
-        SfxPlay(au_void_charge);
-    }
     Camera.screenshake();
     if charge.powerup{
+        //if !audio_is_playing(au_void_charge){
+        //    SfxPlay(au_void_charge);
+        //}
         charge.current=charge.mx;
     }else{
+        //if !audio_is_playing(au_void_charge){
+        //    SfxPlay(au_void_charge);
+        //}
         charge.current=approach(charge.current,charge.mx,charge.v);
     }
     AddGuiMessage("charge.current: "+str(charge.current));

@@ -1,1 +1,1 @@
-sprite_index=cutscene_sprite;
+sprite_index=spr_cutscene_end1;
