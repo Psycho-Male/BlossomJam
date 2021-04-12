@@ -541,6 +541,7 @@ function state_death(){
     sprite_index=sprite.death;
     if animEnd{
         instance_destroy(all);
+        room_begin=room;
         room_goto(rm_init);
     }
 }

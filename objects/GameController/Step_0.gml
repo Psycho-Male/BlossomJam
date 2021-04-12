@@ -1,5 +1,6 @@
 if kp_u{
     instance_destroy(all);
+    room_begin=room;
     room_goto(rm_init);
 }
 //if debug{
