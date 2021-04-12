@@ -4,7 +4,7 @@ if room==rm_init{
             persistent=true;
         }
     }
-    room_goto(room_begin);
+    room_goto(STARTROOM);
     audio_group_set_gain(audiogroup_default,.5,0);
     InputLock(false,false);
     InputActionRelease();

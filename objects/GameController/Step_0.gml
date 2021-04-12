@@ -1,6 +1,6 @@
 if kp_u{
     instance_destroy(all);
-    room_begin=room;
+    STARTROOM=room;
     room_goto(rm_init);
 }
 //if debug{
@@ -11,6 +11,11 @@ if kp_u{
 //            if room_next(room)!=-1{
 //                room_goto_next();
 //            }
+//        }
+//    }
+//    if kp_h{
+//        if instance_exists(Player){
+//            Player.hp--;
 //        }
 //    }
 //}

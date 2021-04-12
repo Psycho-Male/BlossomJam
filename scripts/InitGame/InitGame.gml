@@ -1,3 +1,4 @@
+globalvar STARTROOM;STARTROOM=rm_stage2;
 function Trace(_text){
     show_debug_message(_text);
 }
